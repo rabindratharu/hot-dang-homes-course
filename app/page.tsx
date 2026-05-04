@@ -1,5 +1,5 @@
 
-import { getHomePageData } from "../lib/useWordPressData.js";
+import { getHomePageData } from "../lib/dataFetchers.js";
 import { BlockRenderer } from "../components/BlockRenderer/BlockRenderer.js";
 import { cleanTransformBlocks } from "../utils/cleanTransformBlocks.js";
 
