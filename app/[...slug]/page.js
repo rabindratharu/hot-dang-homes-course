@@ -1,6 +1,6 @@
 import { getAllContentSlugs, getPageContentBySlug } from "../../lib/dataFetchers.js";
 import { BlockRenderer } from "../../components/BlockRenderer/BlockRenderer.js";
-import { cleanTransformBlocks } from "../../utils/cleanTransformBlocks.js";
+import { cleanTransformBlocks } from "../../utils/index.js";
 
 export default async function DynamicPage({ params }) {
   // Await params if it's a promise (Next.js 15+)
