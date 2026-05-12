@@ -2,7 +2,7 @@ import { Cover } from "../Cover/Cover.js";
 import { Heading } from "../Heading/Heading.js";
 import { Paragraph } from "../Paragraph/Paragraph.js";
 export const BlockRenderer = ({ blocks }) => {
-    console.log("Rendering blocks:", blocks);
+   // console.log("Rendering blocks:", blocks);
     return blocks.map((block) => {
         switch (block.name) {
             case 'core/paragraph':
