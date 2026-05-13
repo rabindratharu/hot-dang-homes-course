@@ -24,3 +24,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+  .button {
+    @apply bg-pink-500 hover:bg-pink-700 text-white uppercase cursor-pointer inline-block px-3 py-2 rounded-sm;
+  }
+}

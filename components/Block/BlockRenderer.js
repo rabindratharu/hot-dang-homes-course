@@ -1,8 +1,8 @@
-import { Cover } from "../Cover/Cover.js";
-import { Heading } from "../Heading/Heading.js";
-import { Paragraph } from "../Paragraph/Paragraph.js";
+import { Cover } from "./Cover";
+import { Heading } from "./Heading";
+import { Paragraph } from "./Paragraph";
 export const BlockRenderer = ({ blocks }) => {
-   // console.log("Rendering blocks:", blocks);
+   console.log("Rendering blocks:", blocks);
     return blocks.map((block) => {
         switch (block.name) {
             case 'core/paragraph':
@@ -21,8 +21,11 @@ export const BlockRenderer = ({ blocks }) => {
                 return <Cover key={block.id} background={block.attributes?.url}>
                     <BlockRenderer blocks={block.innerBlocks} />
                 </Cover>;
-            default:
+            default: {
+                //console.log("Unsupported block:", block);
                 return null; // Return null for unsupported block types
+            }
+                
         }
     });
 }

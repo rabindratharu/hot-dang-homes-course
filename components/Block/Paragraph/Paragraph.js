@@ -1,4 +1,4 @@
-import { getTextAlign, relativeToAbsoluteUrls } from "../../utils/index.js";
+import { getTextAlign, relativeToAbsoluteUrls } from "../../../utils";
 
 export const Paragraph = ({ content, textAlign, textColor, linkColor, linkHoverColor }) => {
     // Only apply link styles if both linkColor and linkHoverColor are defined

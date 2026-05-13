@@ -1,17 +1,10 @@
 import Link from "next/link";
-import { FiHome, FiHeart } from "react-icons/fi";
 
-export const MainMenu = (props) => {
-  const { menuItems, callToAction } = props;
+export const Menu = ( props ) => {
+    const { menuItems } = props;
   return (
-    <div className="bg-slate-800 text-white px-5 h-[64px] sticky top-0 z-20 flex">
-      <div className="flex items-center justify-start gap-1 text-pink-500">
-        <FiHome size={30} />
-        <FiHeart size={30} />
-      </div>
-      <div className="flex flex-1 items-center justify-end">
-        <div className="flex gap-5">
-          {(menuItems || []).map((item) => (
+    <nav className="flex gap-5">
+        {(menuItems || []).map((item) => (
             <div key={item.id} className="relative group">
               <Link href={item.destination} className="hover:bg-slate-700 cursor-pointer block px-3 py-2">
                 {item.label}
@@ -38,13 +31,6 @@ export const MainMenu = (props) => {
               )}
             </div>
           ))}
-        </div>
-        <div className="ml-5">
-          <Link href={callToAction.destination} className="bg-pink-500 hover:bg-pink-700 text-white uppercase cursor-pointer inline-block px-3 py-2 rounded-sm">
-            {callToAction.label}
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-};
+    </nav>
+  )
+}
