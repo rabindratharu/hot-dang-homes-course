@@ -1,9 +1,19 @@
-import React from "react";
-import { getTextAlign, getFontSize } from "../../../utils";
-export const Heading = ({ textAlign, content, level }) => {
-    const tag = React.createElement(`h${level}`, {
-        className: `${getTextAlign(textAlign)} ${getFontSize(level)} max-w-5xl mx-auto my-5`,
-        dangerouslySetInnerHTML: { __html: content }
-    });
-  return tag;
-}
+import classNames from 'classnames';
+import {
+  relativeToAbsoluteUrls,
+  generateClasses,
+  generateStyle,
+} from "../../../utils";
+
+export const Heading = ({ attributes }) => {
+  const { level, content, style } = attributes;
+  const HeadingTag = `h${level}`;
+  
+  return (
+    <HeadingTag 
+      className={classNames(generateClasses(attributes))}
+      dangerouslySetInnerHTML={{ __html: relativeToAbsoluteUrls(content) }}
+      style={generateStyle(style)}
+    />
+  );
+};
