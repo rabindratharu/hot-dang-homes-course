@@ -1,5 +1,63 @@
 import classNames from 'classnames';
 
+
+/**
+ * Generates Tailwind CSS classes for layout styling
+ * @param {Object} layout - Layout configuration object
+ * @returns {string} Combined layout classes
+ */
+const getLayout = (layout) => {
+  const classes = [];
+
+  if (layout) {
+    // Display type
+    if (layout?.type === 'flex') {
+      classes.push('flex gap-2');
+    } else if (layout?.type === 'grid') {
+      classes.push('grid gap-2');
+    } else if (layout?.type === 'block') {
+      classes.push('block');
+    }
+
+    // Justify content
+    if (layout?.justifyContent) {
+      const justifyMap = {
+        'left': 'justify-start',
+        'center': 'justify-center',
+        'right': 'justify-end',
+        'space-between': 'justify-between',
+        'space-around': 'justify-around',
+        'space-evenly': 'justify-evenly',
+        'flex-start': 'justify-start',
+        'flex-end': 'justify-end'
+      };
+      
+      classes.push(justifyMap[layout.justifyContent] || '');
+    }
+
+    // Orientation (flex direction)
+    if (layout?.orientation) {
+      if (layout.orientation === 'vertical') {
+        classes.push('flex-col');
+      } else if (layout.orientation === 'horizontal') {
+        classes.push('flex-row');
+      }
+    }
+
+    // Align items (add if needed)
+    if (layout?.alignItems) {
+      const alignMap = {
+        'start': 'items-start',
+        'center': 'items-center',
+        'end': 'items-end',
+        'stretch': 'items-stretch'
+      };
+      classes.push(alignMap[layout.alignItems] || '');
+    }
+  }
+
+  return classes.filter(Boolean).join(' ');
+};
 /**
  * Gets text alignment class based on alignment value
  * @param {string} textAlign - Text alignment value
@@ -13,6 +71,34 @@ const getTextAlign = (textAlign) => {
     justify: 'text-justify'
   };
   return alignments[textAlign] || '';
+};
+
+/**
+ * Gets text alignment class based on alignment value
+ * @param {string} textAlign - Text alignment value
+ * @returns {string} Tailwind text alignment class
+ */
+const getAlign = (align) => {
+  const alignment = {
+    wide: 'max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
+    full: 'w-full mx-auto',
+  };
+  return alignment[align] || '';
+};
+
+/**
+ * Gets width class based on percentage value
+ * @param {number|string} width - Width percentage (25, 50, 75, 100)
+ * @returns {string} Tailwind width class
+ */
+const getWidth = (width) => {
+  const widths = {
+    25: 'w-1/4',
+    50: 'w-1/2',
+    75: 'w-3/4',
+    100: 'w-full'
+  };
+  return widths[width] || '';
 };
 
 /**
@@ -42,11 +128,14 @@ const getFontSize = (level) => {
  * @returns {string} Combined class names
  */
 export const generateClasses = (attributes) => {
-  const { level, textAlign, className, style } = attributes || {};
+  const { level, textAlign, className, style, layout, width, align } = attributes || {};
   return classNames(
     className,
     getTextAlign(textAlign),
+    getAlign(align),
+    getLayout(layout),
     getFontSize(level),
+    getWidth(width),
     getColorClasses(style?.color, style?.elements?.link),
     getSpacingClasses(style?.spacing),
     getBorderClasses(style?.border),
