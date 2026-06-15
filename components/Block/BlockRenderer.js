@@ -6,10 +6,23 @@ import { Button } from "./Button";
 import { Columns } from "./Columns";
 import { Column } from "./Column";
 import { FeaturedImage } from "./FeaturedImage";
+import { List } from "./List";
+import { ListItem } from "./ListItem";
 export const BlockRenderer = ({ blocks }) => {
     console.log("Rendering blocks:", blocks);
     return blocks.map((block) => {
         switch (block.name) {
+            case 'core/list':
+                return <List key={block.id} attributes={block.attributes} >
+                    <BlockRenderer blocks={block.innerBlocks} />
+                </List>;
+            case 'core/list-item':
+                return <ListItem key={block.id} attributes={block.attributes} />;
+            case 'core/buttons':
+                return <Buttons key={block.id} attributes={block.attributes} >
+                    <BlockRenderer blocks={block.innerBlocks} />
+                </Buttons>;
+
             case 'core/button':
                 return <Button key={block.id} attributes={block.attributes} />;
             case 'core/buttons':
