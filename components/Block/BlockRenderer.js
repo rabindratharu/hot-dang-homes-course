@@ -5,6 +5,7 @@ import { Buttons } from "./Buttons";
 import { Button } from "./Button";
 import { Columns } from "./Columns";
 import { Column } from "./Column";
+import { FeaturedImage } from "./FeaturedImage";
 export const BlockRenderer = ({ blocks }) => {
     console.log("Rendering blocks:", blocks);
     return blocks.map((block) => {
@@ -25,6 +26,8 @@ export const BlockRenderer = ({ blocks }) => {
                 </Column>;
             case 'core/paragraph':
                 return <Paragraph key={block.id} attributes={block.attributes} />;
+            case 'core/image':
+                return <FeaturedImage key={block.id} attributes={block.attributes} />;
             case 'core/heading':
                 return <Heading key={block.id} attributes={block.attributes} />;
             case 'core/cover':
