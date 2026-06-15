@@ -6,14 +6,14 @@ import {
 } from "../../../utils";
 
 export const Heading = ({ attributes }) => {
-  const { level, content, style } = attributes;
+  const { level, content } = attributes;
   const HeadingTag = `h${level}`;
-  
+
   return (
-    <HeadingTag 
-      className={classNames(generateClasses(attributes))}
+    <HeadingTag
+      className={attributes ? classNames(generateClasses(attributes)) : undefined}
+      style={attributes && attributes.style ? generateStyle(attributes.style) : undefined}
       dangerouslySetInnerHTML={{ __html: relativeToAbsoluteUrls(content) }}
-      style={generateStyle(style)}
     />
   );
 };

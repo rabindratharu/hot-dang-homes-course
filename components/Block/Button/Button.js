@@ -5,15 +5,15 @@ import {
     generateStyle,
 } from "../../../utils";
 
-export const Button = ({ attributes, extraClasses = '' }) => {
-    const { content, style, url } = attributes;
+export const Button = ({ attributes, extraClasses = 'button' }) => {
+    const { content, url } = attributes;
 
     return (
         <a
             href={url ? relativeToAbsoluteUrls(url) : '#'}
-            className={classNames(generateClasses(attributes), extraClasses)}
             dangerouslySetInnerHTML={{ __html: relativeToAbsoluteUrls(content ? content : 'Button') }}
-            style={generateStyle(style)}
+            className={attributes ? classNames(generateClasses(attributes), extraClasses) : undefined}
+            style={attributes && attributes.style ? generateStyle(attributes.style) : undefined}
         />
     );
 };

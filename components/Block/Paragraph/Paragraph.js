@@ -6,13 +6,13 @@ import {
 } from "../../../utils";
 
 export const Paragraph = ({ attributes }) => {
-  const { content, style } = attributes;
+  const { content } = attributes;
 
   return (
-    <p 
-      className={classNames(generateClasses(attributes))}
+    <p
+      className={attributes ? classNames(generateClasses(attributes)) : undefined}
+      style={attributes && attributes.style ? generateStyle(attributes.style) : undefined}
       dangerouslySetInnerHTML={{ __html: relativeToAbsoluteUrls(content) }}
-      style={generateStyle(style)}
     />
   );
 };

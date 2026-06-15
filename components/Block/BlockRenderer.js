@@ -3,6 +3,8 @@ import { Heading } from "./Heading";
 import { Paragraph } from "./Paragraph";
 import { Buttons } from "./Buttons";
 import { Button } from "./Button";
+import { Columns } from "./Columns";
+import { Column } from "./Column";
 export const BlockRenderer = ({ blocks }) => {
     console.log("Rendering blocks:", blocks);
     return blocks.map((block) => {
@@ -13,6 +15,14 @@ export const BlockRenderer = ({ blocks }) => {
                 return <Buttons key={block.id} attributes={block.attributes} >
                     <BlockRenderer blocks={block.innerBlocks} />
                 </Buttons>;
+            case 'core/columns':
+                return <Columns key={block.id} attributes={block.attributes} columns={block.innerBlocks?.length || 1} >
+                    <BlockRenderer blocks={block.innerBlocks} />
+                </Columns>;
+            case 'core/column':
+                return <Column key={block.id} attributes={block.attributes} >
+                    <BlockRenderer blocks={block.innerBlocks} />
+                </Column>;
             case 'core/paragraph':
                 return <Paragraph key={block.id} attributes={block.attributes} />;
             case 'core/heading':

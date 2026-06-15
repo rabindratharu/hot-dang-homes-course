@@ -2,20 +2,19 @@ import classNames from 'classnames';
 import { generateClasses, generateStyle } from "../../../utils";
 
 export const Cover = ({ children, attributes }) => {
-  const { 
+  const {
     url,
-    style,
     customOverlayColor,
     hasParallax,
     dimRatio = 50,
-    minHeight = 400, 
-    minHeightUnit = 'px' 
+    minHeight = 400,
+    minHeightUnit = 'px'
   } = attributes;
 
   return (
     <div
-      className={classNames(generateClasses(attributes))}
-      style={{ ...generateStyle(style), '--overlay-color': customOverlayColor, '--min-height': `${minHeight}${minHeightUnit}` }}
+      className={attributes ? classNames(generateClasses(attributes)) : undefined}
+      style={attributes && attributes.style ? { ...generateStyle(attributes.style), '--overlay-color': customOverlayColor, '--min-height': `${minHeight}${minHeightUnit}` } : undefined}
     >
       <div
         className="relative w-full overflow-hidden"
